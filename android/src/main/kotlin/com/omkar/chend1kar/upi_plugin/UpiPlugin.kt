@@ -67,21 +67,23 @@ class UpiPlugin: FlutterPlugin, MethodCallHandler, ActivityAware ,PluginRegistry
       val orgid: String? = call.argument("orgid")
 
       try{
-        var uriBuilder: Uri.Builder = Uri.Builder()
-       .scheme("upi")
-       .authority("pay")
-       .appendQueryParameter("pa", pa)
-       .appendQueryParameter("pn", Uri.encode(pn))
-       .appendQueryParameter("mc", Uri.encode(mc))
-       .appendQueryParameter("tr", Uri.encode(tr))
-       .appendQueryParameter("tn", Uri.encode(tn))
-       .appendQueryParameter("am", Uri.encode(am))
-       .appendQueryParameter("cu", Uri.encode(cu))
-       .appendQueryParameter("url", Uri.encode(url))
-      //  .appendQueryParameter("mode",Uri.encode(mode))
-      //  .appendQueryParameter("orgid",Uri.encode(orgid))
+        var uriStr: String? = "upi://pay?pa=" + pa +
+              "&pn=" + Uri.encode(pn) +
+              "&tr=" + Uri.encode(tr) +
+              "&am=" + Uri.encode(am) +
+              "&cu=" + Uri.encode(cu)
+      if(url != null) {
+        uriStr += ("&url=" + Uri.encode(url))
+      }
+      if(mc != null) {
+        uriStr += ("&mc=" + Uri.encode(mc))
+      }
+      if(tn != null) {
+        uriStr += ("&tn=" + Uri.encode(tn))
+      }
+      uriStr += "&mode=00" // &orgid=000000"
 
-      var uri: Uri = uriBuilder.build()
+      val uri = Uri.parse(uriStr)
 
       var intent : Intent = Intent(Intent.ACTION_VIEW)
 
