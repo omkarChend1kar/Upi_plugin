@@ -11,7 +11,7 @@ class PayApp extends StatefulWidget {
 }
 
 class _PayAppState extends State<PayApp> {
-  final String _pa = "cloudyml@icici";
+  final String _pa = "8879369452@upi";
   final String _pn = 'Omkar';
   final String _am = '10.00';
   final String _tn = 'Payment from Omkar';
