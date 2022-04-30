@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:upi_plugin/upi_plugin.dart';
 
-import 'components/upiapps.dart';
-
-
 
 class PayApp extends StatefulWidget {
   const PayApp({Key? key}) : super(key: key);
@@ -14,7 +11,7 @@ class PayApp extends StatefulWidget {
 }
 
 class _PayAppState extends State<PayApp> {
-  final String _pa = "8879369452@ybl";
+  final String _pa = "cloudyml@icici";
   final String _pn = 'Omkar';
   final String _am = '10.00';
   final String _tn = 'Payment from Omkar';
@@ -22,8 +19,8 @@ class _PayAppState extends State<PayApp> {
   static const String _mode = '04';
   static const String _orgId = '000000';
   static const String? _url = null; /*'omkar.chend1kar@gmail.com';*/
-  static const String? _mc =null; /*'110100';*/
-  static const String? _tr = null; /*'110100ejt';*/
+  static const String? _mc = ""; /*'110100';*/
+  static const String? _tr = '110100eljntw'; /*'110100ejt';*/
 
   String responseText = 'No response yet';
 
@@ -54,48 +51,49 @@ class _PayAppState extends State<PayApp> {
       home: Scaffold(
         body: SafeArea(
           child: Container(
-              child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(responseText),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CupertinoButton(
-                    color: Colors.black87,
-                    child: Text('Gpay'),
-                    onPressed: () {
-                      initiateTransaction(UpiApps.GooglePay);
-                    },
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(responseText),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CupertinoButton(
-                    color: Colors.black87,
-                    child: Text('PhonePe'),
-                    onPressed: () {
-                      initiateTransaction(UpiApps.PhonePe);
-                    },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CupertinoButton(
+                      color: Colors.black87,
+                      child: Text('Gpay'),
+                      onPressed: () {
+                        initiateTransaction(UpiApps.GooglePay);
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CupertinoButton(
-                    color: Colors.black87,
-                    child: Text('PayTM'),
-                    onPressed: () {
-                      initiateTransaction(UpiApps.PayTM);
-                    },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CupertinoButton(
+                      color: Colors.black87,
+                      child: Text('PhonePe'),
+                      onPressed: () {
+                        initiateTransaction(UpiApps.PhonePe);
+                      },
+                    ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CupertinoButton(
+                      color: Colors.black87,
+                      child: Text('PayTM'),
+                      onPressed: () {
+                        initiateTransaction(UpiApps.PayTM);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ),
       ),
     );

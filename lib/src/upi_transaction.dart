@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 class UpiTransaction {
-  static const MethodChannel _channel = MethodChannel('upi_payment');
+  static const MethodChannel _channel = MethodChannel('upi_plugin');
   static Future<String> initiateTransaction(
       {required String? app,
       required String? pa,

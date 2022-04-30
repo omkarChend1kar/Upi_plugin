@@ -85,21 +85,25 @@ class UpiPlugin: FlutterPlugin, MethodCallHandler, ActivityAware ,PluginRegistry
 
       val uri = Uri.parse(uriStr)
 
-      var intent : Intent = Intent(Intent.ACTION_VIEW)
-
-      intent.setData(uri)
-
-      intent.setPackage(app)
-
-      // if(intent.resolveActivity(this.activity!!.getPackageManager())!=null){
-      if(isAppInstalled(app)){
-          this.activity!!.startActivityForResult(intent,requestCodeNum)
-          finalresult.success("App_exist")
-      }else{
-          finalresult.error("app_is_not_installed","Requested app not installed",null)
-          isResultReceived = true
-          Log.d("upi_plugin",app+" is not installed")
+      var intent : Intent? = Intent(Intent.ACTION_VIEW).apply{
+        flags=Intent.FLAG_GRANT_READ_URI_PERMISSION
+        data = uri 
       }
+
+      // intent = this.activity!!.getPackageManager().getLaunchIntentForPackage(app!!)
+      // intent!!.setAction(Intent.ACTION_VIEW)
+      // intent!!.setData(uri)
+      intent!!.setPackage(app)
+      // this.activity!!.startActivity(intent)
+      // if(intent.resolveActivity(this.activity!!.getPackageManager())!=null){
+      // if(isAppInstalled(app)){
+      this.activity!!.startActivityForResult(intent,requestCodeNum)
+      //     finalresult.success("App_exist")
+      // }else{
+      //     finalresult.error("app_is_not_installed","Requested app not installed",null)
+      //     isResultReceived = true
+      //     Log.d("upi_plugin",app+" is not installed")
+      // }
       // }else {
       //   finalresult.success("app_is_not_installedapp_cannot_resolve_activity")
       // }
@@ -120,7 +124,6 @@ class UpiPlugin: FlutterPlugin, MethodCallHandler, ActivityAware ,PluginRegistry
         }catch (e:Exception){
           if(! isResultReceived) finalresult.error("null_response",e.toString(),null)
         }
-
       } else {
           if(! isResultReceived) finalresult.error("user_canceled","User canceled the transaction",null)
       }
